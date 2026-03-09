@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist da Manipulação Emocional | @agatha.kleber</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #f9dfe0;
+    --rose-mid: #f0bfc2;
+    --wine: #7a1230;
+    --wine-dark: #4a0a1c;
+    --blush: #fdf0f1;
+    --text: #2a0a12;
+    --text-light: #7a4a52;
+    --white: #fff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background decorativo */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, #f9c4ca 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -150px; left: -150px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, #e8a0aa 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 40px 0 32px;
+    animation: fadeDown 0.8s ease both;
+  }
+  .header .handle {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--wine);
+    opacity: 0.7;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 8vw, 42px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--wine-dark);
+    margin-bottom: 8px;
+  }
+  .header h1 em {
+    font-style: italic;
+    color: var(--wine);
+  }
+  .header p {
+    font-size: 15px;
+    color: var(--text-light);
+    max-width: 400px;
+    margin: 12px auto 0;
+    line-height: 1.6;
+  }
+
+  /* INSTRUÇÃO */
+  .instrucao {
+    background: var(--white);
+    border-left: 4px solid var(--wine);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.6;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .instrucao strong {
+    color: var(--wine);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* SEÇÃO */
+  .secao {
+    margin-bottom: 12px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .secao-titulo {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--wine);
+    opacity: 0.6;
+    padding: 0 4px 10px;
+  }
+
+  /* CARD DE PERGUNTA */
+  .card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 2px solid transparent;
+    box-shadow: 0 2px 12px rgba(122,18,48,0.06);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(122,18,48,0.12);
+  }
+  .card.marcado {
+    background: var(--wine);
+    border-color: var(--wine-dark);
+    transform: scale(0.98);
+    box-shadow: 0 4px 16px rgba(122,18,48,0.3);
+  }
+  .card.marcado .card-titulo,
+  .card.marcado .card-exemplo,
+  .card.marcado .card-pergunta {
+    color: var(--white);
+  }
+  .card.marcado .card-exemplo {
+    opacity: 0.7;
+  }
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .checkbox {
+    width: 22px; height: 22px;
+    min-width: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--rose-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    transition: all 0.2s;
+    margin-top: 2px;
+    background: var(--blush);
+  }
+  .card.marcado .checkbox {
+    background: rgba(255,255,255,0.25);
+    border-color: rgba(255,255,255,0.5);
+  }
+  .card-titulo {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+    flex: 1;
+  }
+  .card-exemplo {
+    font-size: 13px;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: 6px;
+    margin-left: 34px;
+    line-height: 1.5;
+  }
+  .card-pergunta {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--wine);
+    margin-top: 10px;
+    margin-left: 34px;
+    padding-top: 10px;
+    border-top: 1px solid var(--rose-mid);
+  }
+  .card.marcado .card-pergunta {
+    border-top-color: rgba(255,255,255,0.2);
+  }
+
+  /* ALERTA */
+  .alerta {
+    background: #fff3f4;
+    border: 2px solid #e8a0aa;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 28px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--wine-dark);
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .alerta strong {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--wine);
+    margin-bottom: 8px;
+  }
+
+  /* CONTADOR */
+  .contador-fixo {
+    position: fixed;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .contador-fixo.visivel {
+    opacity: 1;
+  }
+  .contador-pill {
+    background: var(--wine);
+    color: var(--white);
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 8px 24px rgba(122,18,48,0.4);
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  /* BOTÃO VER RESULTADO */
+  .btn-resultado {
+    width: 100%;
+    padding: 18px;
+    background: var(--wine);
+    color: var(--white);
+    border: none;
+    border-radius: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 24px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 20px rgba(122,18,48,0.3);
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .btn-resultado:hover {
+    background: var(--wine-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(122,18,48,0.45);
+  }
+  .btn-resultado:active { transform: scale(0.97); }
+
+  /* RESULTADO */
+  .resultado {
+    display: none;
+    animation: fadeUp 0.7s ease both;
+  }
+  .resultado.ativo { display: block; }
+
+  .resultado-header {
+    background: var(--wine);
+    border-radius: 20px;
+    padding: 36px 28px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .resultado-header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .resultado-header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 150px; height: 150px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .resultado-placar {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .resultado-placar span {
+    font-size: 24px;
+    font-weight: 300;
+    opacity: 0.6;
+  }
+  .resultado-nivel {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .resultado-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    line-height: 1.3;
+    position: relative; z-index: 1;
+  }
+
+  .resultado-corpo {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(122,18,48,0.06);
+  }
+  .resultado-corpo p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-light);
+  }
+  .resultado-corpo p + p { margin-top: 12px; }
+
+  .resultado-barra {
+    background: var(--rose);
+    border-radius: 50px;
+    height: 8px;
+    margin: 20px 0 8px;
+    overflow: hidden;
+  }
+  .resultado-progresso {
+    height: 100%;
+    background: linear-gradient(90deg, var(--wine), #c03060);
+    border-radius: 50px;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0;
+  }
+  .resultado-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-light);
+    opacity: 0.6;
+  }
+
+  .resultado-cta {
+    background: var(--rose);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .resultado-cta p {
+    font-size: 14px;
+    color: var(--wine-dark);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .resultado-cta a {
+    display: inline-block;
+    background: var(--wine);
+    color: var(--white);
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.25s;
+  }
+  .resultado-cta a:hover {
+    background: var(--wine-dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-refazer {
+    width: 100%;
+    padding: 16px;
+    background: transparent;
+    color: var(--text-light);
+    border: 2px solid var(--rose-mid);
+    border-radius: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+  .btn-refazer:hover { border-color: var(--wine); color: var(--wine); }
+
+  .footer-brand {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 12px;
+    color: var(--text-light);
+    opacity: 0.5;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ANIMAÇÕES */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* QUIZ WRAPPER */
+  #quiz-wrapper { animation: fadeUp 0.6s ease both; }
+  #quiz-wrapper.escondido { display: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="handle">@agatha.kleber</div>
+    <h1>Estou sendo<br><em>manipulada?</em></h1>
+    <p>Responda com honestidade. Pense nos últimos 30 dias do seu relacionamento.</p>
+  </div>
+
+  <div id="quiz-wrapper">
+
+    <div class="instrucao">
+      <strong>Como responder</strong>
+      Marque ✔ se aconteceu com frequência ou foi grave. Uma vez isolada e leve → deixe em branco. Em dúvida? Pergunte-se: <em>"O que eu senti e fiz logo depois?"</em> Se você se calou ou pediu desculpa sem certeza, provavelmente conta.
+    </div>
+
+    <!-- BLOCO 1 -->
+    <div class="secao" style="animation-delay:0.1s">
+      <div class="secao-titulo">Invalidação &amp; Vergonha</div>
+
+      <div class="card" onclick="toggle(this, 0)">
+        <div class="card-top">
+          <div class="checkbox">☐</div>
+          <div class="card-titulo">Ele invalida sua percepção (gaslighting)</div>
+        </div>
+        <div class="card-exemplo">"Você tá louca / inventando / exagerando."</div>
+        <div class="card-pergunta">Ele faz você duvidar do que sentiu ou viu?</div>
+      </div>
+
+      <div class="card" onclick="toggle(this, 1)">
+        <div class="card-top">
+          <div class="checkbox">☐</div>
+          <div class="card-titulo">Ele minimiza ou ridiculariza sua dor</div>
+        </div>
+        <div class="card-exemplo">"Blá blá blá… lá vem drama."</div>
+        <div class="card-pergunta">Ele transforma sua dor em piada ou frescura?</div>
+      </div>
+
+      <div class="card" onclick="toggle(this, 2)">
+        <div class="card-top">
+          <div class="checkbox">☐</div>
+          <div class="card-titulo">Ele usa vergonha ou humilhação para vencer</div>
+        </div>
+        <div class="card-exemplo">"Ninguém te aguenta." / "Ridícula." / "Fraca."</div>
+        <div class="card-pergunta">Ele te diminui pra vencer a discussão?</div>
+      </div>
+    </div>
+
+    <!-- BLOCO 2 -->
+    <div class="secao" style="animation-delay:0.2s">
+      <div class="secao-titulo">Ameaça &amp; Controle</div>
+
+      <div class="card" onclick="toggle(this, 3)">
+        <div class="card-top">
+          <div class="checkbox">☐</div>
+          <div class="card-titulo">Ele ameaça ir embora para te controlar</div>
+        </div>
+        <div class="card-exemplo">"Se não tá bom, termina então."</div>
+        <div class="card-pergunta">Ele usa ultimato pra te calar?</div>
+      </div>
+
+      <div class="card" onclick="toggle(this, 4)">
+        <div class="card-top">
+          <div class="checkbox">☐</div>
+          <div class="card-titulo">Ele controla sob o rótulo de "cuidado"</div>
+        </div>
+        <div class="card-exemplo">Dita roupa, amigos, horários — "porque te ama".</div>
+        <div class="card-pergunta">As "preocupações" dele limitam a sua liberdade?</div>
+      </div>
+
+      <div class="card" onclick="toggle(this, 5)">
+        <div class="card-top">
+          <div class="checkbox">☐</div>
+          <div class="card-titulo">Regras duplas — ele pode, você não</div>
+        </div>
+        <div class="card-exemplo">Muda as regras quando convém, sempre a seu favor.</div>
+        <div class="card-pergunta">As regras mudam pra favorecer ele?</div>
+      </div>
+    </div>
+
+    <!-- BLOCO 3 -->
+    <div class="secao" style="animation-delay:0.3s">
+      <div class="secao-titulo">Fuga &amp; Apagamento</div>
+
+      <div class="card" onclick="toggle(this, 6)">
+        <div class="card-top">
+          <div class="checkbox">☐</div>
+          <div class="card-titulo">Ele foge da conversa ("paz de cemitério")</div>
+        </div>
+        <div class="card-exemplo">Some, muda de assunto, dorme brigado e no dia seguinte "tá tudo bem".</div>
+        <div class="card-pergunta">Ele evita reparar e só deixa o tempo passar?</div>
+      </div>
+
+      <div class="card" onclick="toggle(this, 7)">
+        <div class="card-top">
+          <div class="checkbox">☐</div>
+          <div class="card-titulo">Ele desqualifica seus limites</div>
+        </div>
+        <div class="card-exemplo">"Que frescura esse negócio de limite / espaço."</div>
+        <div class="card-pergunta">Ele invalida seus limites e pede que você "relaxe"?</div>
+      </div>
+    </div>
+
+    <!-- BLOCO 4 -->
+    <div class="secao" style="animation-delay:0.4s">
+      <div class="secao-titulo">Inconsistência &amp; Culpa</div>
+
+      <div class="card" onclick="toggle(this, 8)">
+        <div class="card-top">
+          <div class="checkbox">☐</div>
+          <div class="card-titulo">Ele vira o jogo e te culpa</div>
+        </div>
+        <div class="card-exemplo">"A culpa é sua / você provocou."</div>
+        <div class="card-pergunta">Ele te culpa quando você aponta um problema?</div>
+      </div>
+
+      <div class="card" onclick="toggle(this, 9)">
+        <div class="card-top">
+          <div class="checkbox">☐</div>
+          <div class="card-titulo">Promete mudar, mas não pratica os 3 R's</div>
+        </div>
+        <div class="card-exemplo">"Agora vai mudar" — sem Reconhecer, Reparar, Repetir diferente.</div>
+        <div class="card-pergunta">As promessas não viram hábito em 7 ou 30 dias?</div>
+      </div>
+    </div>
+
+    <!-- ALERTA -->
+    <div class="alerta">
+      <strong>⚠ Atenção imediata</strong>
+      Se houver <strong>ameaça, intimidação, humilhação sistemática, isolamento ou controle de dinheiro/telefone</strong>, trate como alto risco independentemente do total e busque apoio especializado.
+    </div>
+
+    <button class="btn-resultado" onclick="verResultado()">Ver meu resultado →</button>
+
+  </div><!-- /quiz-wrapper -->
+
+  <!-- RESULTADO -->
+  <div class="resultado" id="resultado">
+    <div class="resultado-header" id="resultado-header">
+      <div class="resultado-nivel" id="resultado-nivel">Resultado</div>
+      <div class="resultado-placar" id="resultado-placar">0<span>/10</span></div>
+      <div class="resultado-titulo" id="resultado-titulo"></div>
+    </div>
+
+    <div class="resultado-corpo">
+      <div class="resultado-barra">
+        <div class="resultado-progresso" id="resultado-barra"></div>
+      </div>
+      <div class="resultado-labels">
+        <span>0 — atenção consciente</span>
+        <span>alto risco — 10</span>
+      </div>
+      <p id="resultado-texto" style="margin-top:20px"></p>
+      <p id="resultado-texto2"></p>
+    </div>
+
+    <div class="resultado-cta">
+      <p id="resultado-cta-texto"></p>
+      <a href="https://www.instagram.com/agatha.kleber" target="_blank">📲 Seguir @agatha.kleber</a>
+    </div>
+
+    <button class="btn-refazer" onclick="reiniciar()">↩ Refazer o checklist</button>
+  </div>
+
+  <div class="footer-brand">© Ágatha &amp; Kleber — @agatha.kleber</div>
+
+</div><!-- /container -->
+
+<!-- CONTADOR FLUTUANTE -->
+<div class="contador-fixo" id="contador-fixo">
+  <div class="contador-pill" id="contador-pill">0 marcadas</div>
+</div>
+
+<script>
+  const respostas = new Array(10).fill(false);
+
+  function toggle(card, idx) {
+    respostas[idx] = !respostas[idx];
+    card.classList.toggle('marcado', respostas[idx]);
+    const cb = card.querySelector('.checkbox');
+    cb.textContent = respostas[idx] ? '✔' : '☐';
+    atualizarContador();
+  }
+
+  function atualizarContador() {
+    const total = respostas.filter(Boolean).length;
+    const pill = document.getElementById('contador-pill');
+    const fixo = document.getElementById('contador-fixo');
+    pill.textContent = total === 0 ? 'Nenhuma marcada' : `${total} marcada${total > 1 ? 's' : ''}`;
+    fixo.classList.toggle('visivel', total > 0);
+  }
+
+  function verResultado() {
+    const total = respostas.filter(Boolean).length;
+
+    const niveis = [
+      { range: [0, 2], nivel: 'Atenção Consciente', titulo: 'Sinais mínimos por enquanto', cor: '#7a1230',
+        texto: 'Você marcou poucos itens, o que é um bom sinal. Mas atenção é sempre saudável. Relacionamentos saudáveis se constroem na consistência — observe se esses padrões vão ou não se repetindo.',
+        texto2: 'Continue acompanhando. O autoconhecimento que você está desenvolvendo é a sua maior proteção.',
+        cta: 'Se quiser entender mais sobre como construir relacionamentos com equilíbrio real, me segue lá no Instagram — todo dia tem conteúdo pensado pra você.' },
+      { range: [3, 4], nivel: 'Zona Amarela', titulo: 'Padrão emergente — fique de olho', cor: '#7a1230',
+        texto: 'Você identificou sinais que merecem atenção. Ainda não é uma zona de alarme, mas é o momento perfeito de fortalecer seus limites e observar se esse padrão se repete.',
+        texto2: 'Zona amarela não significa que está tudo perdido. Significa que é hora de agir com consciência, não de esperar as coisas melhorarem sozinhas.',
+        cta: 'Vem me seguir no Instagram — eu falo exatamente sobre como navegar esse tipo de situação sem perder a sua sanidade emocional.' },
+      { range: [5, 6], nivel: 'Padrão de Manipulação', titulo: 'Você merece mais do que isso', cor: '#4a0a1c',
+        texto: 'Os sinais que você marcou indicam um padrão de manipulação emocional. Isso não é exagero, não é fraqueza, e não é culpa sua. Sua percepção é válida.',
+        texto2: 'Esse é o momento de estabelecer limites claros e, se precisar, buscar apoio — seja de pessoas de confiança ou profissional. Você não precisa resolver isso sozinha.',
+        cta: 'Lá no meu Instagram você vai encontrar conteúdo que vai te ajudar a entender o que está acontecendo e como se posicionar. Vem comigo.' },
+      { range: [7, 10], nivel: 'Alto Risco Emocional', titulo: 'Você não está exagerando', cor: '#2a0512',
+        texto: 'O que você identificou é sério. Um número alto de sinais indica alto risco emocional — e possivelmente mais do que isso. Você não está inventando. O que você sente é real.',
+        texto2: 'É importante que você ative um plano de segurança emocional e avalie se essa relação pode continuar. Busque apoio especializado. Você merece se sentir segura.',
+        cta: 'Cuide-se primeiro. E quando estiver pronta, meu conteúdo no Instagram existe pra te ajudar a reconstruir sua clareza emocional. Estou aqui.' },
+    ];
+
+    const nivel = niveis.find(n => total >= n.range[0] && total <= n.range[1]);
+
+    document.getElementById('resultado-placar').innerHTML = `${total}<span>/10</span>`;
+    document.getElementById('resultado-nivel').textContent = nivel.nivel;
+    document.getElementById('resultado-titulo').textContent = nivel.titulo;
+    document.getElementById('resultado-texto').textContent = nivel.texto;
+    document.getElementById('resultado-texto2').textContent = nivel.texto2;
+    document.getElementById('resultado-cta-texto').textContent = nivel.cta;
+    document.getElementById('resultado-header').style.background = nivel.cor;
+
+    document.getElementById('quiz-wrapper').classList.add('escondido');
+    document.getElementById('contador-fixo').classList.remove('visivel');
+
+    const resultadoEl = document.getElementById('resultado');
+    resultadoEl.classList.add('ativo');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Animar barra
+    setTimeout(() => {
+      document.getElementById('resultado-barra').style.width = `${(total / 10) * 100}%`;
+    }, 400);
+  }
+
+  function reiniciar() {
+    respostas.fill(false);
+    document.querySelectorAll('.card').forEach(c => {
+      c.classList.remove('marcado');
+      c.querySelector('.checkbox').textContent = '☐';
+    });
+    document.getElementById('resultado').classList.remove('ativo');
+    document.getElementById('quiz-wrapper').classList.remove('escondido');
+    document.getElementById('resultado-barra').style.width = '0';
+    atualizarContador();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
